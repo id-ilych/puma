@@ -701,6 +701,26 @@ module Puma
       @config.options[:events].on_booted(&block)
     end
 
+    # Code to run when puma is restarting (works for both: single and clustered)
+    #
+    # @example
+    #   on_restart do
+    #     puts 'Before restarting...'
+    #   end
+    def on_restart(&block)
+      @config.options[:events].on_restart(&block)
+    end
+
+    # Code to run after puma is stopped (works for both: single and clustered)
+    #
+    # @example
+    #   on_stopped do
+    #     puts 'After stopping...'
+    #   end
+    def on_stopped(&block)
+      @config.options[:events].on_stopped(&block)
+    end
+
     # When `fork_worker` is enabled, code to run in Worker 0
     # before all other workers are re-forked from this process,
     # after the server has temporarily stopped serving requests
